@@ -1,0 +1,28 @@
+-- Casos negativos. Execute como postgres APENAS no banco de teste, após migrations.
+begin;
+create function pg_temp.expect_error(command text,msg text) returns void language plpgsql as $$ begin begin execute command; exception when others then return; end; raise exception 'EXPECTED ERROR: %',msg; end $$;
+create function pg_temp.assert_true(ok boolean,msg text) returns void language plpgsql as $$ begin if ok is distinct from true then raise exception 'ASSERT: %',msg; end if; end $$;
+select pg_temp.assert_true(not public.valid_cpf('A52998224725'),'CPF não permite letras');
+select pg_temp.assert_true(not public.valid_phone('10999991234'),'DDD inexistente');
+select pg_temp.assert_true(not public.valid_phone('11888881234'),'celular deve começar com 9');
+select pg_temp.assert_true(public.valid_phone('1132221234'),'telefone fixo brasileiro');
+select pg_temp.assert_true(not public.valid_full_name('Nome 123'),'nome sem dígitos');
+select pg_temp.assert_true(public.valid_full_name('João Pedro da Silva'),'nome com partículas');
+select pg_temp.expect_error($q$insert into auth.users(id,email,raw_user_meta_data) values('20000000-0000-0000-0000-000000000001','invalid@movee.invalid','{"full_name":"Nome 123","cpf_cnpj":"52998224725","phone":"11999991234","birth_date":"1990-01-01","requested_role":"client","terms":true}')$q$,'nome inválido no banco');
+select pg_temp.expect_error($q$insert into auth.users(id,email,raw_user_meta_data) values('20000000-0000-0000-0000-000000000001','invalid@movee.invalid','{"full_name":"Nome Exemplo","cpf_cnpj":"52998224725","phone":"11999991234","birth_date":"1800-01-01","requested_role":"client","terms":true}')$q$,'idade máxima');
+select pg_temp.expect_error($q$insert into auth.users(id,email,raw_user_meta_data) values('20000000-0000-0000-0000-000000000001','invalid@movee.invalid','{"full_name":"Nome Exemplo","cpf_cnpj":"A52998224725","phone":"11999991234","birth_date":"1990-01-01","requested_role":"client","terms":true}')$q$,'CPF canônico único');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":null,"weight":1,"unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,0,0)$q$,'quantidade nula');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1.5,"weight":1,"unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,0,0)$q$,'quantidade fracionária');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":"NaN","unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,0,0)$q$,'NaN peso');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":1,"unit":"kg","length_cm":-10,"width_cm":10,"height_cm":10}]',10,false,false,0,0)$q$,'dimensão negativa');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":1,"unit":"lb","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,0,0)$q$,'unidade inválida');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":1,"unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]','Infinity',false,false,0,0)$q$,'distância infinita');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":1,"unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,-1,0)$q$,'extras negativos');
+select pg_temp.expect_error($q$select public.quote_delivery('motorcycle','[{"description":"Caixa","quantity":1,"weight":1,"unit":"kg","length_cm":10,"width_cm":10,"height_cm":10}]',10,false,false,0,10)$q$,'pedágio sem integração');
+select pg_temp.expect_error($q$update public.vehicle_categories set base_price='NaN' where id='motorcycle'$q$,'tarifa NaN');
+select pg_temp.expect_error($q$update public.vehicle_categories set max_volume_m3='Infinity' where id='motorcycle'$q$,'volume infinito');
+select pg_temp.expect_error($q$update public.vehicle_categories set length_cm=10001 where id='motorcycle'$q$,'dimensões fora do domínio');
+select pg_temp.expect_error($q$select public.prepare_provider_payment(null,'pix',null)$q$,'preferência nula');
+select pg_temp.expect_error($q$select public.confirm_provider_payment(null,null,null,null)$q$,'confirmação nula');
+do $$ begin raise notice 'PASS: entradas malformadas, formatos brasileiros, idades, finitude numérica e limites do domínio.'; end $$;
+rollback;
