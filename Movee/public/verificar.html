@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="referrer" content="no-referrer">
+ <meta name="robots" content="noindex,nofollow">
+ <title>Confirme seu e-mail — Movee</title>
+ <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="assets/css/style.css">
+ <script src="assets/js/common.js" defer></script>
+ <script src="assets/js/auth.js" defer></script>
+</head>
+<body data-page="verify">
+ <a href="#main" class="skip-link">Pular para o conteúdo</a>
+ <header class="site-header" id="site-header"></header>
+ <main id="main" tabindex="-1" class="auth-page">
+  <div class="container auth-layout">
+   <section class="auth-story">
+    <span class="eyebrow">UM CUIDADO A MAIS COM VOCÊ</span>
+    <h1>Seu e-mail.<br>Seu primeiro passo.</h1>
+    <p>Antes de entrar na conta, confirme o endereço informado no cadastro. Abra a mensagem da Movee e siga o link de confirmação.</p>
+    <img src="assets/img/auth-connect.svg" width="580" height="600" alt="Ilustração de uma encomenda protegida conectando pessoas">
+   </section>
+   <section class="auth-card">
+    <span class="badge" id="verify-badge">CONFIRMAÇÃO DO ACESSO</span>
+    <h2 style="margin-top:17px" id="verify-title">Confira sua caixa de entrada.</h2>
+    <p id="verify-description">Abra seu e-mail e clique em “Confirmar meu e-mail”. Confira também a pasta de spam.</p>
+    <div id="notice" hidden></div>
+    <section id="email-link-panel" class="stack" hidden aria-label="Confirmar o link recebido por e-mail">
+     <p class="muted">Se você criou esta conta, confirme seu e-mail para continuar. Caso contrário, feche esta página.</p>
+     <button id="confirm-email-link" type="button" class="btn btn-primary btn-wide">Confirmar meu e-mail</button>
+     <button id="use-confirmation-code" type="button" class="btn btn-link btn-wide">Usar código ou solicitar outro e-mail</button>
+    </section>
+    <section id="confirmation-success" class="notice success" tabindex="-1" hidden aria-live="polite">
+     <h3 id="confirmation-success-title">E-mail confirmado!</h3>
+     <p id="confirmation-success-description">Seu endereço foi confirmado.</p>
+     <a id="confirmation-continue" class="btn btn-primary btn-wide" href="perfil.html">Continuar para minha conta</a>
+    </section>
+    <form id="verify-form">
+     <div class="field">
+      <label for="channel">Confirmar por</label>
+      <select id="channel" name="channel"><option value="email">E-mail — link ou código</option><option value="sms" id="verify-sms-option">SMS — após confirmar o e-mail</option></select>
+     </div>
+     <div class="field" id="verify-email-field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+     <div class="field" id="verify-phone-field" hidden><label for="phone">Telefone com DDD</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="20"></div>
+     <div class="field"><label for="token">Código de confirmação da mensagem</label><input id="token" name="token" inputmode="numeric" autocomplete="one-time-code" pattern="[A-Za-z0-9_-]{6,128}" minlength="6" maxlength="128" placeholder="000000" required><small class="form-help">Você também pode abrir o link do e-mail, sem digitar o código.</small></div>
+     <button class="btn btn-primary btn-wide" type="submit">Confirmar código <span data-icon="check"></span></button>
+     <button type="button" class="btn btn-link btn-wide" id="resend-code">Enviar novo e-mail ou código</button>
+    </form>
+    <form id="reset-form" hidden>
+     <div class="field"><label for="new-password">Nova senha</label><div class="password-wrap"><input id="new-password" name="password" type="password" autocomplete="new-password" minlength="10" maxlength="128" required><button type="button" class="password-toggle" data-password="new-password" aria-label="Exibir senha" aria-pressed="false"><span data-icon="eye"></span></button></div><small class="form-help">10 ou mais caracteres, incluindo maiúscula, minúscula, número e símbolo.</small></div>
+     <div class="field"><label for="new-password-confirm">Confirmar nova senha</label><input id="new-password-confirm" type="password" autocomplete="new-password" minlength="10" maxlength="128" required></div>
+     <button class="btn btn-primary btn-wide" type="submit">Salvar nova senha</button>
+    </form>
+    <div class="auth-bottom"><a href="login.html">Já confirmei meu e-mail: entrar</a><a href="ajuda.html">Preciso de ajuda</a></div>
+   </section>
+  </div>
+ </main>
+ <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

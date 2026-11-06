@@ -1,0 +1,274 @@
+/* Dedicated administration workspaces. Values and authorizations come from the API. */
+.admin-page-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0 0 27px;
+  padding: 7px;
+  border: 1px solid #e9e3f2;
+  border-radius: 16px;
+  background: #fff;
+}
+.admin-page-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: #665b78;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.admin-page-links a:hover,
+.admin-page-links a.active,
+.admin-page-links a[aria-current="page"] {
+  background: #efe8fb;
+  color: #5728a3;
+}
+.admin-page-links a:focus-visible {
+  outline: 3px solid #8152ca;
+  outline-offset: 3px;
+}
+.revenue-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 23px;
+}
+.revenue-header h2 { margin-bottom: 7px; }
+.revenue-header p { max-width: 600px; font-size: 13px; }
+.revenue-header form,
+.revenue-header .toolbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+.revenue-header .field { width: 120px; margin: 0; }
+.revenue-header input,
+.revenue-header select { min-height: 44px; }
+.revenue-header .btn { flex-shrink: 0; }
+.revenue-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 25px;
+}
+.revenue-summary .metric { min-width: 0; }
+.revenue-summary .metric strong {
+  font-size: clamp(24px, 2.3vw, 34px);
+  overflow-wrap: anywhere;
+}
+.revenue-chart-wrap {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 8px 0 2px;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: #b9a0dd #f2edf9;
+  scrollbar-width: thin;
+}
+.revenue-chart {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+  gap: 12px;
+  min-width: 650px;
+  min-height: 270px;
+  padding: 20px 8px 13px;
+  border-bottom: 1px solid #ded5ec;
+  background-image: linear-gradient(to top, #f1edf7 1px, transparent 1px);
+  background-size: 100% 48px;
+}
+.revenue-month {
+  display: grid;
+  grid-template-rows: 28px 190px 24px;
+  justify-items: stretch;
+  align-items: end;
+  gap: 8px;
+  min-width: 0;
+  text-align: center;
+}
+.revenue-value {
+  color: #57466e;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.revenue-bar-wrap {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  width: 100%;
+  height: 190px;
+  min-height: 0;
+}
+.revenue-bar {
+  position: relative;
+  display: block;
+  width: min(100%, 45px);
+  min-width: 16px;
+  min-height: 0;
+  border-radius: 10px 10px 3px 3px;
+  background: linear-gradient(180deg, #9b78dc 0%, #6332b6 100%);
+  box-shadow: 0 6px 14px #6332b615;
+  transition: filter .2s ease;
+}
+.revenue-month:hover .revenue-bar { filter: brightness(.93); }
+.revenue-chart [data-highest="true"] .revenue-bar::before,
+.revenue-chart .revenue-bar[data-highest="true"]::before {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 5px;
+  background: #bbed78;
+  content: "";
+}
+.revenue-label {
+  color: #70647e;
+  font-size: 11px;
+  font-weight: 700;
+}
+.revenue-chart-empty {
+  padding: 23px;
+  border: 1px dashed #d6c9e6;
+  border-radius: 14px;
+  background: #fbf9ff;
+  color: #6e5d81;
+  text-align: center;
+  font-size: 13px;
+  margin: 17px 0 4px;
+}
+.revenue-chart-empty strong { display: block; color: #3b2754; margin-bottom: 5px; }
+.revenue-policy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, .75fr);
+  align-items: center;
+  gap: 24px;
+  padding: 25px;
+  margin: 23px 0;
+  border: 1px solid #e4d9f2;
+  border-radius: 19px;
+  background: linear-gradient(110deg, #eee5fa, #f9f5ff);
+}
+.revenue-policy h2,
+.revenue-policy h3 { color: #412368; }
+.revenue-policy p { color: #6d5a80; font-size: 12px; }
+.revenue-policy .btn { width: fit-content; margin-top: 16px; }
+.commission-split {
+  display: flex;
+  width: 100%;
+  min-height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #d8c9ed;
+}
+.commission-split > *:first-child { background: #6333b1; }
+.commission-split > *:last-child { background: #bde986; }
+.commission-split-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #58426f;
+}
+.admin-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 13px;
+  margin: 0 0 24px;
+}
+.admin-status-grid > * {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e7e1ef;
+  border-radius: 15px;
+  background: #fff;
+}
+.admin-status-grid strong { display: block; margin: 5px 0; font-size: 24px; color: #4b2878; }
+.admin-status-grid small,
+.admin-status-grid span { font-size: 11px; color: #766787; }
+.admin-monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.admin-monitor-grid > * { min-width: 0; }
+.admin-incident {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 13px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee8f5;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.admin-incident:last-child { border-bottom: 0; }
+.admin-incident strong { color: #4c2c73; }
+.admin-revenue-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 240px;
+  padding: 30px;
+  border: 1px solid #eee8f5;
+  border-radius: 18px;
+  background: #fff;
+  color: #6b587c;
+}
+.admin-revenue-loading::before {
+  width: 21px;
+  height: 21px;
+  border: 3px solid #e9dff5;
+  border-top-color: #6a3bb6;
+  border-radius: 50%;
+  content: "";
+  animation: admin-loading-spin .8s linear infinite;
+}
+.admin-finance-table { font-variant-numeric: tabular-nums; }
+.admin-finance-table tfoot td { background: #f4eefc; font-weight: 750; }
+.revenue-notes { display: grid; gap: 12px; margin-top: 20px; }
+.revenue-notes p { color: #75677f; font-size: 12px; }
+@keyframes admin-loading-spin { to { transform: rotate(360deg); } }
+@media (max-width: 1050px) {
+  .revenue-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .revenue-policy { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .admin-page-links { padding: 6px; gap: 5px; }
+  .admin-page-links a { flex: 1 1 43%; padding: 10px 8px; font-size: 11px; }
+  .revenue-header { align-items: start; gap: 18px; }
+  .revenue-header form,
+  .revenue-header .toolbar { width: 100%; gap: 9px; }
+  .revenue-header .field { width: 105px; flex: 1 1 105px; }
+  .revenue-header .btn { font-size: 11px; padding-inline: 12px; }
+  .revenue-summary { gap: 10px; }
+  .revenue-summary .metric { padding: 17px; }
+  .revenue-summary .metric strong { font-size: 23px; }
+  .revenue-policy { padding: 21px; }
+  .revenue-chart { gap: 10px; padding-inline: 5px; }
+  .admin-monitor-grid { grid-template-columns: 1fr; }
+  .admin-status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .admin-status-grid > * { padding: 15px; }
+  .admin-incident { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .revenue-bar { transition: none; }
+  .admin-revenue-loading::before { animation: none; }
+}

@@ -1,0 +1,2 @@
+# Opcional: somente para reproduzir os testes de navegador, não para executar o site.
+playwright>=1.50,<2

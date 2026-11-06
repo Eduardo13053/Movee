@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirme seu e-mail — Movee</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f3fb;color:#24183d;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#f5f3fb;">Confirme o e-mail do seu cadastro para acessar sua conta Movee.</div>
+  <table role="presentation" style="width:100%;border-collapse:collapse;background-color:#f5f3fb;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" style="width:100%;max-width:580px;border-collapse:collapse;">
+          <tr>
+            <td style="padding:0 4px 22px;color:#5b36d1;font-size:29px;font-weight:700;letter-spacing:-1px;">Movee<span style="color:#39764e;">.</span></td>
+          </tr>
+          <tr>
+            <td style="padding:32px 28px;background-color:#ffffff;border:1px solid #e8e5ee;border-radius:18px;">
+              <p style="margin:0 0 12px;color:#5b36d1;font-size:11px;font-weight:700;letter-spacing:1.4px;">SUA PRÓXIMA CONEXÃO COMEÇA AQUI</p>
+              <h1 style="margin:0 0 18px;color:#24183d;font-size:29px;line-height:1.2;">Confirme seu e-mail.</h1>
+              <p style="margin:0 0 20px;font-size:15px;">Recebemos um pedido de cadastro na Movee. Para confirmar este endereço e acessar sua conta, abra o link abaixo.</p>
+              <table role="presentation" style="border-collapse:collapse;margin:0 0 22px;">
+                <tr>
+                  <td style="background-color:#5b36d1;border-radius:10px;">
+                    <a href="{{ .SiteURL }}/verificar.html?token_hash={{ .TokenHash }}&amp;type=signup" style="display:inline-block;padding:14px 22px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;">Confirmar meu e-mail</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:0 0 22px;color:#625a70;font-size:13px;">Na página aberta, selecione <strong>Confirmar meu e-mail</strong> para concluir. O link tem validade limitada e só pode ser utilizado uma vez. Se expirar, solicite uma nova mensagem no site.</p>
+              <table role="presentation" style="width:100%;border-collapse:collapse;background-color:#f4f0fc;border-radius:12px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <p style="margin:0 0 8px;color:#24183d;font-size:13px;"><strong>Prefere usar um código?</strong></p>
+                    <p style="margin:0 0 10px;color:#625a70;font-size:13px;">Abra a página de confirmação da Movee e informe o e-mail do cadastro com este código:</p>
+                    <p style="margin:0 0 10px;color:#5b36d1;font-family:Consolas,'Courier New',monospace;font-size:26px;font-weight:700;letter-spacing:4px;">{{ .Token }}</p>
+                    <a href="{{ .SiteURL }}/verificar.html?type=signup" style="color:#5b36d1;font-size:13px;font-weight:700;text-decoration:underline;">Abrir a página de confirmação</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:22px 0 0;color:#625a70;font-size:12px;">Se você não pediu este cadastro, ignore esta mensagem. Não compartilhe o link, o código ou sua senha com outras pessoas.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 4px 0;color:#746e80;font-size:12px;">Movee · Conectamos destinos, facilitamos caminhos.<br>Esta é uma mensagem automática de confirmação de cadastro.</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
